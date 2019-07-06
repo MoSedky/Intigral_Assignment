@@ -32,7 +32,3 @@ Feature:
     Scenario:
       Then User clicks on Terms and Conditions link in create your account section
       Then User should see that Terms & Conditions section is displayed
-    Scenario: tsts
-      Given xxxx
-      When ddddd
-      Then dddd
