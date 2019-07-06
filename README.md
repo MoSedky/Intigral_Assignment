@@ -9,6 +9,7 @@ Following classes used for Page Object Model Cases:
 - SubscribePage
 - UserStatusPage
 - TermsandConditionsPage
+
 And SampleTestingPageObject is working as Page Object Manager
 
 I used Properties files so that I can pass parameters value through the whole Classes which is PropertyManager
