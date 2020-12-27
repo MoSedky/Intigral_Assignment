@@ -6,9 +6,8 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions( monochrome = true,
-        features = "src\\test\\resources\\io\\cucumber",
+        features = "src/test/resources/io/cucumber/skeleton/sampletesting.feature",
         glue = {"SampleTestingStepDefs"},
-        tags = {"@Top_test","not @Bottom_test"},
         plugin = {"pretty"}
 )
 public class RunCucumberTest {

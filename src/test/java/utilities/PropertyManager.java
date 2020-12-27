@@ -1,25 +1,28 @@
 package utilities;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Properties;
 public class PropertyManager {
     private static PropertyManager instance;
     private static final Object lock = new Object();
-    private static String propertyFilePath = System.getProperty("user.dir")+
-            "\\src\\test\\resources\\configuration.properties";
+    private static String propertyFilePath = "/src/test/resources/configuration.properties";
     private static String url;
     private static String Username;
     private static String Password;
     private static String Country;
-    private static WebDriver Driver;
+    private static RemoteWebDriver Driver;
     private static String Driver_Url;
 
     //Create a Singleton instance. We need only one instance of Property Manager.
-    public static PropertyManager getInstance () {
+    public static PropertyManager getInstance () throws MalformedURLException {
         if (instance == null) {
             synchronized (lock) {
                 instance = new PropertyManager();
@@ -30,12 +33,12 @@ public class PropertyManager {
     }
 
     //Get all configuration data and assign to related fields.
-    private void loadData() {
+    private void loadData() throws MalformedURLException {
         //Declare a properties object
         Properties prop = new Properties();
         //Set ChromeDriver path and properties
-        prop.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+
-                        Driver_Url);
+//        prop.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+
+//                        "chromeDriver.exe");
 
         //Read configuration.properties file
         try {
@@ -50,7 +53,12 @@ public class PropertyManager {
         Username = prop.getProperty("Username");
         Password = prop.getProperty("Password");
         Country=prop.getProperty("Country");
-        Driver = new ChromeDriver();
+        ChromeOptions options=new ChromeOptions();
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setBrowserName("chrome");
+        capabilities.setVersion("85.0");
+        capabilities.setCapability("enableVNC", true);
+        Driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
     }
 
     public WebDriver getdriver(){

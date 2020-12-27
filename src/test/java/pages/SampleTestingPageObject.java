@@ -4,17 +4,22 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import utilities.PropertyManager;
 
+import java.net.MalformedURLException;
+
 public class SampleTestingPageObject {
 
-    private WebDriver driver=PropertyManager.getInstance().getdriver();
+    public WebDriver driver=PropertyManager.getInstance().getdriver();
 
-    private HomePage homePage;
+    public HomePage homePage=new HomePage(driver);
     private PaymentPage paymentPage;
     private UserStatusPage userStatusPage;
     private SubscribePage subscribePage;
     private TermsandConditionsPage termsandConditionsPage;
 
-    public SampleTestingPageObject(WebDriver driver) {
+    public SampleTestingPageObject() throws MalformedURLException {
+    }
+
+    public SampleTestingPageObject(WebDriver driver) throws MalformedURLException {
 
         this.driver = driver;
 
