@@ -19,18 +19,40 @@ public class HomePage {
         driver.get(Url);
     }
 
-    @FindBy(how = How.XPATH, using = "//a[contains(@href,'en/home')]")
-    private WebElement btn_English;
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Sign in')]")
+    private WebElement Sign_In_Url;
 
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Subscribe Now')]")
-    private WebElement btn_Subscribe_trial;
+    @FindBy(how = How.XPATH, using = "//input[@id='email']")
+    private WebElement email_txt;
 
-    public void click_On_btn_English(){
-        btn_English.click();
+    @FindBy(how = How.XPATH, using = "//input[@id='passwd']")
+    private WebElement password_txt;
+
+    @FindBy(how = How.XPATH, using = "//button[contains(@id,'Login')]")
+    private WebElement sign_in_btn;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(@class,'user_info')]//*[contains(@href,'controller=my-account')]//span")
+    private WebElement FullName;
+
+
+    public void click_sign_in(){
+        Sign_In_Url.click();
     }
 
-    public void click_On_btn_Subscribe_trial(){
-        btn_Subscribe_trial.click();
+    public void insert_email(String email_val){
+        email_txt.sendKeys(email_val);
+    }
+
+    public void insert_password(String password_val){
+        password_txt.sendKeys(password_val);
+    }
+
+    public void click_sign_in_button(){
+        sign_in_btn.click();
+    }
+
+    public String getFullName(){
+        return FullName.getText();
     }
 
 }

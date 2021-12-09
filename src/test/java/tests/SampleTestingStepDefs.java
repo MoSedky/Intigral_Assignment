@@ -4,6 +4,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import pages.*;
@@ -24,7 +25,7 @@ public class SampleTestingStepDefs {
     String Url;
 
     {
-        Url = "https://www.booking.com/";
+        Url = "http://automationpractice.com/index.php";
     }
 
     WebDriver Driver;
@@ -73,7 +74,7 @@ public class SampleTestingStepDefs {
     }
 
 
-    @Given("^Jawwytv site opens successfully$")
+    @Given("^User Open Landing Page$")
     @Test
     public void Jawwytv_site_opens_successfully() throws MalformedURLException {
         user_on_page();
@@ -84,83 +85,115 @@ public class SampleTestingStepDefs {
         }
     }
 
-    @When("^User changes language in welcome screen$")
+    @When("User clicks on Sign In Url")
+    @Test
     public void User_changes_language_in_welcome_screen(){
-        homePage.click_On_btn_English();
+        homePage.click_sign_in();
     }
 
-    @And("^User clicks on seven days free subscribe now button$")
-    public void User_clicks_on_seven_days_free_subscribe_now_button(){
-        homePage.click_On_btn_Subscribe_trial();
+    @And("User Insert valid Email as {string}")
+    @Test
+    public void User_insert_valid_email_txt(String arg0){
+        homePage.insert_email(arg0);
     }
 
-    @Then("^User enters username as testuser@gm.com$")
-    public void enter_username(){
-        subscribePage.Sendtxt_email(email);
-
+    @And("User Insert valid Password as {string}")
+    public void userInsertValidPasswordAs(String arg0) {
+        homePage.insert_password(arg0);
     }
 
-    @And("User enters password as {string}")
-    public void enter_password(String pwd){
-        subscribePage.Sendtxt_password(String.valueOf(pwd));
+    @And("User Clicks on SignIn button")
+    public void userClicksOnSignInButton() {
+        homePage.click_sign_in_button();
     }
 
-    @And("^User clicks on continue button$")
-    public void click_continue(){
-        subscribePage.clickOn_Continue();
-    }
-
-    @Then("^User should see back button displayed on payment screen$")
-    public void user_should_see_back_button_displayed_on_payment_screen(){
-        if(subscribePage.check_Exist_Back())
-            System.out.println("Back Button displayed on payment screen$");
+    @Then("User Full Name displayed properly")
+    public void userFullNameDisplayedProperly() {
+        String displayed_fullName= homePage.getFullName();
+        String expected_val=fake_api_getFullName();
+        Assert.assertEquals("Displayed Logged In User is not as expected", expected_val, displayed_fullName);
 
     }
-
-    @Then("User should selects {string} from country dropdown menu")
-    public void select_country(){
-        paymentPage.select_country(country);
-
+    
+    public String fake_api_getFullName() {
+        String FullName= "Abdullah Atef";
+        return FullName;
     }
 
-    @And("User should see available payment methods displayed for {string}")
-    public void validate_count_payment(){
-        int no_of_payment_methods=paymentPage.getPayment_methods_count();
-        String payment_method_name=paymentPage.getPayment_methods_text();
-        System.out.println("Available Payment methods for "+country +"are "+no_of_payment_methods+"Name is "+payment_method_name);
 
-    }
-
-    @And("^User clicks on Click here link in create your account section$")
-    public void click_here_btn(){
-        userStatusPage.clickOn_Clickhere();
-
-    }
-
-    @And("^User clicks on Subscribe link in Existing User section$")
-    public void click_subscribe_btn(){
-        userStatusPage.clickOn_Subscribe();
-
-    }
-
-    @Then("^User should navigate to Create your account section$")
-    public void navigate_create_account(){
-        if(userStatusPage.check_Exist_Section())
-            System.out.println("User navigates successfully to Account Section$");
-
-    }
-
-    @Then("^User clicks on Terms and Conditions link in create your account section$")
-    public void click_Terms_Conditions(){
-        termsandConditionsPage.clickOn_Terms();
-
-    }
-
-    @Then("^User should see that Terms & Conditions section is displayed$")
-    public void check_Terms_content(){
-        termsandConditionsPage.check_Exist_Terms();
-
-    }
-
+//    @And("^User Insert valid Password$")
+//    @Test
+//    public void User_insert_valid_password(){
+//        homePage.insert_password();
+//    }
+//
+//    @Then("^User enters username as testuser@gm.com$")
+//    @Test
+//    public void enter_username(){
+//        subscribePage.Sendtxt_email(email);
+//
+//    }
+//
+//    @And("User enters password as {string}")
+//    public void enter_password(String pwd){
+//        subscribePage.Sendtxt_password(String.valueOf(pwd));
+//    }
+//
+//    @And("^User clicks on continue button$")
+//    public void click_continue(){
+//        subscribePage.clickOn_Continue();
+//    }
+//
+//    @Then("^User should see back button displayed on payment screen$")
+//    public void user_should_see_back_button_displayed_on_payment_screen(){
+//        if(subscribePage.check_Exist_Back())
+//            System.out.println("Back Button displayed on payment screen$");
+//
+//    }
+//
+//    @Then("User should selects {string} from country dropdown menu")
+//    public void select_country(){
+//        paymentPage.select_country(country);
+//
+//    }
+//
+//    @And("User should see available payment methods displayed for {string}")
+//    public void validate_count_payment(){
+//        int no_of_payment_methods=paymentPage.getPayment_methods_count();
+//        String payment_method_name=paymentPage.getPayment_methods_text();
+//        System.out.println("Available Payment methods for "+country +"are "+no_of_payment_methods+"Name is "+payment_method_name);
+//
+//    }
+//
+//    @And("^User clicks on Click here link in create your account section$")
+//    public void click_here_btn(){
+//        userStatusPage.clickOn_Clickhere();
+//
+//    }
+//
+//    @And("^User clicks on Subscribe link in Existing User section$")
+//    public void click_subscribe_btn(){
+//        userStatusPage.clickOn_Subscribe();
+//
+//    }
+//
+//    @Then("^User should navigate to Create your account section$")
+//    public void navigate_create_account(){
+//        if(userStatusPage.check_Exist_Section())
+//            System.out.println("User navigates successfully to Account Section$");
+//
+//    }
+//
+//    @Then("^User clicks on Terms and Conditions link in create your account section$")
+//    public void click_Terms_Conditions(){
+//        termsandConditionsPage.clickOn_Terms();
+//
+//    }
+//
+//    @Then("^User should see that Terms & Conditions section is displayed$")
+//    public void check_Terms_content(){
+//        termsandConditionsPage.check_Exist_Terms();
+//
+//    }
 
 }

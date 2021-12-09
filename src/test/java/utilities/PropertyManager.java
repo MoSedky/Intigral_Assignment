@@ -13,7 +13,7 @@ import java.util.Properties;
 public class PropertyManager {
     private static PropertyManager instance;
     private static final Object lock = new Object();
-    private static String propertyFilePath = "/src/test/resources/configuration.properties";
+    private static String propertyFilePath = "src/test/resources/configuation.properties";
     private static String url;
     private static String Username;
     private static String Password;
@@ -49,14 +49,14 @@ public class PropertyManager {
         }
 
         //Get properties from configuration.properties
-        url = prop.getProperty("Url");
-        Username = prop.getProperty("Username");
-        Password = prop.getProperty("Password");
-        Country=prop.getProperty("Country");
+//        url = prop.getProperty("Url");
+//        Username = prop.getProperty("Username");
+//        Password = prop.getProperty("Password");
+//        Country=prop.getProperty("Country");
         ChromeOptions options=new ChromeOptions();
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName("chrome");
-        capabilities.setVersion("85.0");
+        capabilities.setVersion("88.0");
         capabilities.setCapability("enableVNC", true);
         Driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
     }
